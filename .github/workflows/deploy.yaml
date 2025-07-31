@@ -19,7 +19,7 @@ jobs:
 
       - name: Build Docker Compose services
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
 
       - name: Show running containers
         run: docker ps
@@ -27,4 +27,4 @@ jobs:
       - name: Wait and check logs
         run: |
           sleep 10
-          docker-compose logs
+          docker compose logs
