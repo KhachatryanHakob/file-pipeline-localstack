@@ -1,0 +1,30 @@
+name: Docker Compose Test Build
+
+on:
+  push:
+    branches:
+      - main
+      - '*'
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Compose services
+        run: |
+          docker-compose up -d --build
+
+      - name: Show running containers
+        run: docker ps
+
+      - name: Wait and check logs
+        run: |
+          sleep 10
+          docker-compose logs
